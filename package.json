@@ -1,0 +1,60 @@
+{
+  "name": "tikui-cli",
+  "version": "1.0.0",
+  "description": "Command lines tool for Tikui",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint '{src,test}/**/*.ts' -c .eslintrc.js",
+    "lint:fix": "npm run lint --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watchAll": "jest --watchAll"
+  },
+  "repository": "github:tikui/tikui-cli",
+  "keywords": [
+    "CLI"
+  ],
+  "author": {
+    "name": "Arnaud Freismuth"
+  },
+  "contributors": [
+    {
+      "name": "Anthony Rey"
+    },
+    {
+      "name": "Jérémie Tisserand"
+    },
+    {
+      "name": "Hippolyte Durix"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tikui/tikui-cli/issues"
+  },
+  "homepage": "https://github.com/tikui/tikui-cli#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "dependencies": {
+    "@types/node": "^12.7.2",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.4",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2"
+  }
+}
