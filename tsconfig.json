@@ -1,10 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
     "outDir": "build",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "preserveConstEnums": true,
+    "removeComments": true,
     "sourceMap": true,
     "target": "esnext"
   },
