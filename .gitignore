@@ -1,0 +1,6 @@
+/.idea
+/build
+/cache
+/coverage
+/dist
+/node_modules
