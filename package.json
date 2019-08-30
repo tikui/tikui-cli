@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint '{src,test}/**/*.ts' -c .eslintrc.js",
-    "lint:fix": "npm run lint --fix",
+    "lint:fix": "eslint '{src,test}/**/*.ts' -c .eslintrc.js --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll"
@@ -39,7 +39,11 @@
     }
   },
   "dependencies": {
+    "@types/fs-extra": "^8.0.0",
     "@types/node": "^12.7.2",
+    "@types/rimraf": "^2.0.2",
+    "fs-extra": "^8.1.0",
+    "rimraf": "^3.0.0",
     "typescript": "^3.5.3"
   },
   "devDependencies": {
