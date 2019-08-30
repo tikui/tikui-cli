@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  install:
+    docker:
+      - image: circleci/node:10.16.0
+    steps:
+      - checkout
+      - run: npm install
+      - save_cache:
+          key: node_modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  lint:
+    docker:
+      - image: circleci/node:10.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{ checksum "package.json" }}
+      - run: npm run lint
+  audit:
+    docker:
+      - image: circleci/node:10.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{ checksum "package.json" }}
+      - run: npm audit
+  test:
+    docker:
+      - image: circleci/node:10.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{ checksum "./package.json" }}
+      - run: npm test
+
+workflows:
+  version: 2
+  install:
+    jobs:
+      - install
+  test:
+    jobs:
+      - lint:
+          requires:
+            - install
+      - audit:
+          requires:
+            - install
+      - test:
+          requires:
+            - install
