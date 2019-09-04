@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: 10.x
 
     steps:
     - uses: actions/checkout@v1
@@ -23,5 +23,6 @@ jobs:
         npm run build --if-present
         npm run lint
         npm audit
+        npm run test
       env:
         CI: true
