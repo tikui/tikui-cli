@@ -10,7 +10,7 @@ const expectAssetCreatedFor = (folderPath: string, componentName: string) => {
   expect(fs.statSync(path.resolve(__dirname, `${ folderPath }`)).isDirectory()).toBeTruthy();
   expect(fs.statSync(path.resolve(__dirname, `${ folderPath }/${ componentName }.md`)).isFile()).toBeTruthy();
   expect(fs.statSync(path.resolve(__dirname, `${ folderPath }/${ componentName }.render.pug`)).isFile()).toBeTruthy();
-  expect(fs.statSync(path.resolve(__dirname, `${ folderPath }/${ componentName }.template.pug`)).isFile()).toBeTruthy();
+  expect(fs.statSync(path.resolve(__dirname, `${ folderPath }/${ componentName }.code.pug`)).isFile()).toBeTruthy();
   expect(fs.statSync(path.resolve(__dirname, `${ folderPath }/_${ componentName }.scss`)).isFile()).toBeTruthy();
 };
 

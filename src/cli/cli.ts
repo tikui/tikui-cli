@@ -10,6 +10,6 @@ export const createComponent = (basePath: string, component: string): void => {
 
   createFile(componentDirectory, componentName + '.md');
   createFile(componentDirectory, componentName + '.render.pug');
-  createFile(componentDirectory, componentName + '.template.pug');
+  createFile(componentDirectory, componentName + '.code.pug');
   createFile(componentDirectory, '_' + componentName + '.scss');
 };
