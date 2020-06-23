@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint '{src,test}/**/*.ts' -c .eslintrc.js",
     "lint:fix": "eslint '{src,test}/**/*.ts' -c .eslintrc.js --fix",
+    "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll"
@@ -42,7 +43,9 @@
     "@types/fs-extra": "^9.0.1",
     "@types/node": "^14.0.13",
     "@types/rimraf": "^3.0.0",
+    "commander": "^5.1.0",
     "fs-extra": "^9.0.1",
+    "module-alias": "^2.2.2",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.5"
   },
@@ -60,5 +63,11 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "ts-jest": "^26.1.0"
+  },
+  "_moduleAliases": {
+    "@": "dist"
+  },
+  "bin": {
+    "tikuicli": "./dist/bin/tikuicli.js"
   }
 }
