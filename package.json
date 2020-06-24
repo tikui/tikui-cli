@@ -1,5 +1,5 @@
 {
-  "name": "tikui-cli",
+  "name": "@tikui/cli",
   "version": "1.0.0",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.1",
-    "@types/node": "^14.0.13",
+    "@types/node": "^14.0.14",
     "@types/rimraf": "^3.0.0",
     "commander": "^5.1.0",
     "fs-extra": "^9.0.1",
@@ -50,19 +50,19 @@
     "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.0",
-    "@typescript-eslint/eslint-plugin": "^3.3.0",
-    "@typescript-eslint/parser": "^3.3.0",
-    "eslint": "^7.2.0",
+    "@types/jest": "^26.0.1",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "eslint": "^7.3.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jest": "^23.13.2",
-    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-jest": "^23.17.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "ts-jest": "^26.1.0"
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.1"
   },
   "_moduleAliases": {
     "@": "dist"
