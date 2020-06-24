@@ -18,7 +18,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
     'src/**/*.{js,ts}',
-    '!src/application.ts',
+    '!src/bin/tikuicli.ts',
   ],
   coverageReporters: [
     'html',
