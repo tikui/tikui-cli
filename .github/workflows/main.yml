@@ -17,6 +17,7 @@ jobs:
       - name: node check
         run: |
           npm ci
+          npm run lint
           npm audit
           npm test
           npm run build
