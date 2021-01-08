@@ -7,11 +7,18 @@ const createFile = (folderPath: string, filename: string): void => fse.ensureFil
 const dashPrefix = (prefix?: string) => prefix === undefined ? '' : `${prefix}-`;
 
 const createDocumentation = (componentDirectory: string, component: string): void => {
-  const content = `## ${component}\n`;
+  const content = `## ${createDocumentationTitle(component)}\n`;
   const file = `${component}.md`;
   createFile(componentDirectory, file);
   fs.writeFileSync(path.resolve(componentDirectory, file), content);
 };
+
+const createDocumentationTitle = (component: string): string => {
+  const componentNameWithoutDash = component.split('-').join(' ');
+  return capitalize(componentNameWithoutDash);
+};
+
+const capitalize = (sentence: string): string => sentence.length > 1 ? sentence.charAt(0).toUpperCase() + sentence.slice(1) : sentence.toUpperCase();
 
 const createMixin = (componentDirectory: string, component: string, prefix?: string): void => {
   const content = `mixin ${dashPrefix(prefix)}${component}\n  .${dashPrefix(prefix)}${component} ${component}\n`;
@@ -84,6 +91,7 @@ const assertForComponentName = (componentName: string) => {
     throw new Error('Component name should not be empty');
   }
 };
+
 export const createComponent = (basePath: string, component: string, prefix?: string): void => {
   assertForComponentName(component);
   assertForPrefix(prefix);
