@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:watchAll": "jest --watchAll"
+    "test:watchAll": "jest --watchAll",
+    "prepare": "husky install"
   },
   "repository": "github:tikui/tikui-cli",
   "keywords": [
@@ -34,35 +35,30 @@
     "url": "https://github.com/tikui/tikui-cli/issues"
   },
   "homepage": "https://github.com/tikui/tikui-cli#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "dependencies": {
-    "@types/fs-extra": "^9.0.1",
-    "@types/node": "^14.0.14",
+    "@types/fs-extra": "^9.0.9",
+    "@types/node": "^14.14.37",
     "@types/rimraf": "^3.0.0",
-    "commander": "^5.1.0",
-    "fs-extra": "^9.0.1",
+    "commander": "^7.2.0",
+    "fs-extra": "^9.1.0",
     "module-alias": "^2.2.2",
     "rimraf": "^3.0.2",
-    "typescript": "^3.9.5"
+    "typescript": "^4.2.3"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.1",
-    "@typescript-eslint/eslint-plugin": "^3.4.0",
-    "@typescript-eslint/parser": "^3.4.0",
-    "eslint": "^7.3.1",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jest": "^23.17.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.4",
-    "husky": "^4.2.5",
-    "jest": "^26.1.0",
-    "ts-jest": "^26.1.1"
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.4"
   },
   "_moduleAliases": {
     "@": "dist"
