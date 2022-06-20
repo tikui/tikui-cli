@@ -30,6 +30,12 @@ module.exports = {
     'no-var': ['error'],
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
-    "object-curly-spacing": ["error", "always"]
+    'object-curly-spacing': ['error', 'always'],
+    'jest/expect-expect': [
+      'error',
+      {
+        'assertFunctionNames': ['expect*'],
+      },
+    ],
   }
 };

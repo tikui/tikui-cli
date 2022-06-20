@@ -16,11 +16,11 @@ const expectAssetCreatedFor = (folderPath: string, componentName: string) => {
   expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/_${componentName}.scss`)).isFile()).toBeTruthy();
 };
 
-const componentFiles = () => ({
-  documentation: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component/component.md'), 'utf8').toString(),
-  mixin: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component/component.mixin.pug'), 'utf8').toString(),
-  render: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component/component.render.pug'), 'utf8').toString(),
-  style: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component/_component.scss'), 'utf8').toString(),
+const componentFiles = (name = 'component') => ({
+  documentation: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.md`), 'utf8').toString(),
+  mixin: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.mixin.pug`), 'utf8').toString(),
+  render: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.render.pug`), 'utf8').toString(),
+  style: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/_${name}.scss`), 'utf8').toString(),
 });
 
 const componentWithSeparatedNameFiles = () => ({
@@ -36,7 +36,7 @@ describe('CLI tests', () => {
     fse.ensureDirSync(FAKE_SRC_DIR);
   });
 
-  afterAll(() => {
+  afterEach(() => {
     rimraf.sync(FAKE_DIR);
   });
 
@@ -56,7 +56,7 @@ describe('CLI tests', () => {
     expectAssetCreatedFor('src/component/sub-component', 'sub-component');
   });
 
-  it('Should have expected content', () => {
+  it('Should have component content', () => {
     // When
     createComponent(FAKE_SRC_DIR, 'component');
 
@@ -66,6 +66,18 @@ describe('CLI tests', () => {
     expect(mixin).toBe('mixin component\n  .component component\n');
     expect(render).toBe('extends /layout\n\nblock body\n  include component.code.pug\n');
     expect(style).toBe('.component {\n  // component code\n}\n');
+  });
+
+  it('Should have component content for one letter component', () => {
+    // When
+    createComponent(FAKE_SRC_DIR, 'c');
+
+    // Then
+    const { documentation, mixin, render, style } = componentFiles('c');
+    expect(documentation).toBe('## C\n');
+    expect(mixin).toBe('mixin c\n  .c c\n');
+    expect(render).toBe('extends /layout\n\nblock body\n  include c.code.pug\n');
+    expect(style).toBe('.c {\n  // c code\n}\n');
   });
 
   it('Should have expected content for dash separated component name', () => {
