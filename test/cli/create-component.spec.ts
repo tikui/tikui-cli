@@ -1,19 +1,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as rimraf from 'rimraf';
-import * as fse from 'fs-extra';
 import { createComponent } from '@/cli/create-component';
+import { FAKE_DIR, FAKE_SRC_DIR, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
 
-const FAKE_DIR = path.resolve(__dirname, 'tmp');
-const FAKE_SRC_DIR = path.resolve(FAKE_DIR, 'src');
+const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
 const expectAssetCreatedFor = (folderPath: string, componentName: string) => {
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}`)).isDirectory()).toBeTruthy();
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/${componentName}.md`)).isFile()).toBeTruthy();
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/${componentName}.render.pug`)).isFile()).toBeTruthy();
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/${componentName}.mixin.pug`)).isFile()).toBeTruthy();
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/${componentName}.code.pug`)).isFile()).toBeTruthy();
-  expect(fs.statSync(path.resolve(FAKE_DIR, `${folderPath}/_${componentName}.scss`)).isFile()).toBeTruthy();
+  const pathFolderTo = pathTo(folderPath);
+  const pathStatSyncTo = (...segments: string[]) => fs.statSync(pathFolderTo(...segments));
+  const expectFile = (filename: string) => expect(pathStatSyncTo(filename).isFile()).toBe(true);
+
+  expect(pathStatSyncTo().isDirectory()).toBe(true);
+  expectFile(`${componentName}.md`);
+  expectFile(`${componentName}.render.pug`);
+  expectFile(`${componentName}.mixin.pug`);
+  expectFile(`${componentName}.code.pug`);
+  expectFile(`_${componentName}.scss`);
 };
 
 const componentFiles = (name = 'component') => ({
@@ -31,14 +33,9 @@ const componentWithSeparatedNameFiles = () => ({
 });
 
 describe('CLI tests', () => {
-  beforeEach(() => {
-    rimraf.sync(FAKE_DIR);
-    fse.ensureDirSync(FAKE_SRC_DIR);
-  });
+  beforeEach(() => resetFakeDir());
 
-  afterEach(() => {
-    rimraf.sync(FAKE_DIR);
-  });
+  afterAll(() => removeFakeDir());
 
   it('Should create directory component under src and its files', () => {
     // When
