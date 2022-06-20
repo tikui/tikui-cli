@@ -22,4 +22,4 @@ npm install --global
 
 ## Use
 
-When installed, launch `tikuicli` command and follow help to use the CLI.
+When installed, launch `tikui` command and follow help to use the CLI.
