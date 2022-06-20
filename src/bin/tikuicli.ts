@@ -9,7 +9,8 @@ try {
   program
     .command('create <component> [destination]')
     .option('-p, --prefix <name>', 'prefix')
-    .description('create a component')
+    .description('create a component.')
+    .addHelpText('after', '\nExample:\n $ tikui create -p tikui component src/atom')
     .action((component, destination, options) => {
       createComponent(destination, component, options.prefix);
       console.log(`Creating component ${component} to ${path.resolve(destination)}`); // eslint-disable-line no-console
@@ -20,4 +21,3 @@ try {
   console.error(e.message); // eslint-disable-line no-console
   process.exit(1);
 }
-

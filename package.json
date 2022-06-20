@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "scripts": {
@@ -64,6 +64,7 @@
     "@": "dist"
   },
   "bin": {
-    "tikuicli": "./dist/bin/tikuicli.js"
+    "tikuicli": "./dist/bin/tikuicli.js",
+    "tikui": "./dist/bin/tikuicli.js"
   }
 }
