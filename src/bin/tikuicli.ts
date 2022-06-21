@@ -4,6 +4,7 @@ import 'module-alias/register';
 import { program } from 'commander';
 import { createComponent } from '@/cli/create-component';
 import * as path from 'path';
+import { generateProject } from '@/cli/generate-project';
 
 try {
   program
@@ -14,6 +15,15 @@ try {
     .action((component, destination, options) => {
       createComponent(destination, component, options.prefix);
       console.log(`Creating component ${component} to ${path.resolve(destination)}`); // eslint-disable-line no-console
+    });
+
+  program
+    .command('generate <project> [destination]')
+    .description('generate a Tikui project')
+    .addHelpText('after', '\nExample:\n $ tikui generate tikui')
+    .action((project, destination = '.') => {
+      generateProject(destination, project);
+      console.log(`Generating project ${project} to ${path.resolve(destination)}`); // eslint-disable-line no-console
     });
 
   program.parse(process.argv);

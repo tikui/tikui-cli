@@ -4,9 +4,10 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [windows-2022, ubuntu-latest]
         node-version: [16.x]
     steps:
       - uses: actions/checkout@v1
@@ -20,5 +21,3 @@ jobs:
           npm run lint
           npm test
           npm run build
-        env:
-          CI: true
