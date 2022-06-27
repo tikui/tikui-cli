@@ -23,6 +23,7 @@ module.exports = {
   ],
   'rules': {
     'comma-dangle': ['error', 'always-multiline'],
+    'no-trailing-spaces': 'error',
     'indent': ['error', 2],
     'max-len': ['error', { 'code': 180 }],
     'no-console': ['error'],
