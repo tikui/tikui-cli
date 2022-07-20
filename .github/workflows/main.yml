@@ -10,9 +10,9 @@ jobs:
         os: [windows-2022, ubuntu-latest]
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: node check
@@ -21,3 +21,27 @@ jobs:
           npm run lint
           npm test
           npm run build
+  deploy:
+    if: startsWith(github.event.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: 'https://registry.npmjs.org'
+      - name: deploy
+        run: |
+          PACKAGE_VERSION=$(cat package.json|grep version|head -1|awk -F: '{ print $2 }'|sed 's/[", ]//g')
+          echo "Package: $PACKAGE_VERSION"
+          echo "Tag: $GITHUB_REF_NAME"
+          if [ "$PACKAGE_VERSION" != "$GITHUB_REF_NAME" ]; then echo "$PACKAGE_VERSION and $GITHUB_REF_NAME are not the same, skipping"; exit 1; fi
+          echo "Publishing $PACKAGE_VERSION …"
+          npm ci
+          npm run build
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
