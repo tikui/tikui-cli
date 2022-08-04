@@ -36,7 +36,6 @@ const expectAssetCreatedFor = (name: string) => {
     'logo.svg',
     'README.md',
     'tikuiconfig.json',
-    'tsconfig.json',
     'src/tikui.scss',
     'src/layout.pug',
   ].forEach(expectSameFile('common'));
