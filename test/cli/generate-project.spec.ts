@@ -1,14 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { FAKE_DIR, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
+import { FAKE_DIR, fakeDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
 import { generateProject } from '@/cli/generate-project';
 
 const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
 const GENERATE_PROJECT_PATH = path.resolve(__dirname, '../../src/cli/generate-project');
 
-const expectAssetCreatedFor = (name: string) => {
-  const pathFolderTo = pathTo(name);
+const expectAssetCreatedFor = (to: string) => (name: string) => {
+  const pathFolderTo = pathTo(path.join(to, name));
   const pathReadSyncTo = (...segments: string[]) => fs.readFileSync(pathFolderTo(...segments));
   const expectSameFile = (category: string) => (filePath: string) =>
     expect(pathReadSyncTo(filePath).toString()).toBe(fs.readFileSync(path.resolve(GENERATE_PROJECT_PATH, category, filePath)).toString());
@@ -50,33 +50,52 @@ const expectAssetCreatedFor = (name: string) => {
   expectPackageJson();
 };
 
+const SUITE_BASE = 'generate';
+
 describe('CLI tests', () => {
-  beforeEach(() => resetFakeDir());
-
-  afterAll(() => removeFakeDir());
-
   it.each(['project', 'my-awesome_project2'])('Should create project under project name directory and its files for %s', (name) => {
-    generateProject(FAKE_DIR, name);
+    const base = `${SUITE_BASE}-create-${name}`;
+    resetFakeDir(base);
 
-    expectAssetCreatedFor(name);
+    generateProject(fakeDir(base), name);
+
+    expectAssetCreatedFor(base)(name);
+
+    removeFakeDir(base);
   });
 
   it.each([
     { name: ' project  ', normalized: 'project' },
     { name: '\nother\r\t', normalized: 'other' },
   ])('Should normalize for $normalized', ({ name, normalized }) => {
-    generateProject(FAKE_DIR, name);
+    const base = `${SUITE_BASE}-normalize-${normalized}`;
+    resetFakeDir(base);
 
-    expectAssetCreatedFor(normalized);
+    generateProject(fakeDir(base), name);
+
+    expectAssetCreatedFor(base)(normalized);
+
+    removeFakeDir(base);
   });
 
   it('Should not have an empty name', () => {
-    expect(() => generateProject(FAKE_DIR, ' ')).toThrow('The project name should not be empty');
+    const base = `${SUITE_BASE}-empty`;
+    resetFakeDir(base);
+
+    expect(() => generateProject(fakeDir(base), ' ')).toThrow('The project name should not be empty');
+
+    removeFakeDir(base);
   });
 
-  it.each(['bad name', 'é', 'BadName'])('Should not generate for bad name %s', (name) =>
+  it.each(['bad name', 'é', 'BadName'])('Should not generate for bad name %s', (name) => {
+    const base = `${SUITE_BASE}-bad`;
+    resetFakeDir(base);
+
     expect(() =>
-      generateProject(FAKE_DIR, name)
-    ).toThrow(`The project name "${name}" is not valid, it should be composed by lowercase alphanumeric, dash or underscore characters`)
+      generateProject(fakeDir(base), name)
+    ).toThrow(`The project name "${name}" is not valid, it should be composed by lowercase alphanumeric, dash or underscore characters`);
+
+    removeFakeDir(base);
+  }
   );
 });
