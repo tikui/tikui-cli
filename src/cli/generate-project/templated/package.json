@@ -22,7 +22,7 @@
     "serve": "tikui-core serve",
     "build": "tikui-core build",
     "lint": "concurrently npm:sass:lint npm:pug:lint",
-    "pug:lint": "pug-lint ../common/src",
+    "pug:lint": "pug-lint src",
     "sass:lint": "stylelint \"src/**/*.scss\"",
     "sass:lint:fix": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install"
