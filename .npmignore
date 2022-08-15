@@ -3,6 +3,5 @@
 /.editorconfig
 /.idea/
 /node_modules/
-/.editorconfig
 /jest.config.js
 /tsconfig.js

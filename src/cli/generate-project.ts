@@ -5,13 +5,27 @@ import * as fs from 'fs';
 const copyFromCategory = (...categories: string[]) => (basePath: string, name: string): void =>
   categories.forEach(category => fse.copySync(path.resolve(__dirname, `generate-project/${category}`), path.resolve(basePath, name)));
 
-const copyTemplate = (name: string, basePath: string): void => {
-  const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'generate-project/templated/package.json')).toString());
+const templateSourcePath = (filePath: string): string => path.resolve(__dirname, 'generate-project/templated', filePath);
+
+const copyPackageJson = (name: string, basePath: string) => {
+  const packageJson = JSON.parse(fs.readFileSync(templateSourcePath('package.json')).toString());
   const packageJsonWithName = JSON.stringify({
     ...packageJson,
     name,
   }, null, 2).concat('\n');
   fs.writeFileSync(path.resolve(basePath, name, 'package.json'), packageJsonWithName);
+};
+
+const copyGitignore = (basePath: string, name: string): void => {
+  fs.copyFileSync(
+    templateSourcePath('gitignore'),
+    path.resolve(basePath, name, '.gitignore'),
+  );
+};
+
+const copyTemplate = (name: string, basePath: string): void => {
+  copyPackageJson(name, basePath);
+  copyGitignore(basePath, name);
 };
 
 const assertForName = (name: string) => {

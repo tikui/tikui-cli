@@ -2,21 +2,28 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { FAKE_DIR, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
 import { generateProject } from '@/cli/generate-project';
+import { ExpectSame, expectSameBinaryFile, expectSameTextFile } from './file.fixture';
 
 const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
 const GENERATE_PROJECT_PATH = path.resolve(__dirname, '../../src/cli/generate-project');
 
+const pathFromCategory = (category: string) => (filename: string): string => path.resolve(GENERATE_PROJECT_PATH, category, filename);
+
+const pathFromTemplated = pathFromCategory('templated');
+
 const expectAssetCreatedFor = (name: string) => {
   const pathFolderTo = pathTo(name);
-  const pathReadSyncTo = (...segments: string[]) => fs.readFileSync(pathFolderTo(...segments));
-  const expectSameFile = (category: string) => (filePath: string) =>
-    expect(pathReadSyncTo(filePath).toString()).toBe(fs.readFileSync(path.resolve(GENERATE_PROJECT_PATH, category, filePath)).toString());
-  const expectSameBinaryFile = (category: string) => (filePath: string) =>
-    expect(pathReadSyncTo(filePath)).toStrictEqual(fs.readFileSync(path.resolve(GENERATE_PROJECT_PATH, category, filePath)));
+
+  const expectFileForCategory = (expectSame: ExpectSame) => (category: string) => (filePath: string) =>
+    expectSame(pathFolderTo(filePath), pathFromCategory(category)(filePath));
+
+  const expectSameTextFileForCategory = expectFileForCategory(expectSameTextFile);
+  const expectSameBinaryFileForCategory = expectFileForCategory(expectSameBinaryFile);
+
   const expectPackageJson = (): void => {
     const filename = 'package.json';
-    const original = JSON.parse(fs.readFileSync(path.resolve(GENERATE_PROJECT_PATH, 'templated', filename)).toString());
+    const original = JSON.parse(fs.readFileSync(pathFromTemplated(filename)).toString());
     const packageJson = fs.readFileSync(pathFolderTo(filename)).toString();
     const json = JSON.parse(packageJson);
 
@@ -27,10 +34,9 @@ const expectAssetCreatedFor = (name: string) => {
     expect(json.name).toBe(name);
   };
 
-  ['src/favicon.ico'].forEach(expectSameBinaryFile('common'));
+  ['src/favicon.ico'].forEach(expectSameBinaryFileForCategory('common'));
   [
     '.editorconfig',
-    '.gitignore',
     '.pug-lintrc.json',
     '.stylelintrc.json',
     'logo.svg',
@@ -38,16 +44,17 @@ const expectAssetCreatedFor = (name: string) => {
     'tikuiconfig.json',
     'src/tikui.scss',
     'src/layout.pug',
-  ].forEach(expectSameFile('common'));
+  ].forEach(expectSameTextFileForCategory('common'));
   [
     'src/index.pug',
     'src/layout-documentation.pug',
     'src/atom/atom.pug',
     'src/molecule/molecule.pug',
     'src/template/template.pug',
-  ].forEach(expectSameFile('atomic'));
+  ].forEach(expectSameTextFileForCategory('atomic'));
 
   expectPackageJson();
+  expectSameTextFile( pathFolderTo('.gitignore'), pathFromTemplated('gitignore'));
 };
 
 describe('CLI tests', () => {
