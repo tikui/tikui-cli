@@ -1,7 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { createComponent } from '@/cli/create-component';
-import { FAKE_DIR, FAKE_SRC_DIR, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
+import { fakeDir, fakeSrcDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
+
+const FEATURE = 'create-component';
+
+const FAKE_DIR = fakeDir(FEATURE);
+const FAKE_SRC_DIR = fakeSrcDir(FEATURE);
 
 const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
@@ -33,9 +38,9 @@ const componentWithSeparatedNameFiles = () => ({
 });
 
 describe('CLI tests', () => {
-  beforeEach(() => resetFakeDir());
+  beforeEach(() => resetFakeDir(FEATURE));
 
-  afterAll(() => removeFakeDir());
+  afterAll(() => removeFakeDir(FEATURE));
 
   it('Should create directory component under src and its files', () => {
     // When
