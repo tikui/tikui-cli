@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "scripts": {
@@ -53,7 +53,7 @@
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-jest": "^27.0.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",

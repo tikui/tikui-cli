@@ -1,8 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { FAKE_DIR, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
+import { fakeDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
 import { generateProject } from '@/cli/generate-project';
 import { ExpectSame, expectSameBinaryFile, expectSameTextFile } from './file.fixture';
+
+const FEATURE = 'generate-project';
+
+const FAKE_DIR = fakeDir(FEATURE);
 
 const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
@@ -58,9 +62,9 @@ const expectAssetCreatedFor = (name: string) => {
 };
 
 describe('CLI tests', () => {
-  beforeEach(() => resetFakeDir());
+  beforeEach(() => resetFakeDir(FEATURE));
 
-  afterAll(() => removeFakeDir());
+  afterAll(() => removeFakeDir(FEATURE));
 
   it.each(['project', 'my-awesome_project2'])('Should create project under project name directory and its files for %s', (name) => {
     generateProject(FAKE_DIR, name);
