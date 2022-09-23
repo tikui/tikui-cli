@@ -1,24 +1,18 @@
 {
-  "plugins": [
-    "stylelint-scss"
-  ],
+  "plugins": ["stylelint-scss"],
   "customSyntax": "postcss-scss",
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-concentric-order"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-concentric-order"],
   "rules": {
     "max-empty-lines": 1,
     "max-nesting-depth": 3,
-    "order/properties-alphabetical-order": null,
+    "string-quotes": "single",
+    "selector-class-pattern": "^-?([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+    "function-parentheses-newline-inside": "always-multi-line",
     "selector-list-comma-newline-after": "always-multi-line",
     "selector-no-qualifying-type": [
       true,
       {
-        "ignore": [
-          "class"
-        ]
+        "ignore": ["class"]
       }
     ]
   }
