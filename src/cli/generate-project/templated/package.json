@@ -28,9 +28,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@tikui/core": "^3.0.0",
+    "@tikui/core": "^3.0.1",
     "@types/concurrently": "^7.0.0",
-    "tikuidoc-tikui": "^5.0.0"
+    "tikuidoc-tikui": "^5.0.1"
   },
   "devDependencies": {
     "concurrently": "^7.2.2",
