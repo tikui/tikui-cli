@@ -124,4 +124,20 @@ describe('CLI tests', () => {
       .toThrow('The prefix should have alphabetic characters separated by dashes: "-" at position 4 is not allowed');
     expect(() => createComponent(FAKE_SRC_DIR, 'a-long-component')).not.toThrow();
   });
+
+  it('Should style manage mixin with options on component class', () => {
+    // When
+    createComponent(FAKE_SRC_DIR, 'component', 'prefix', true);
+
+    // Then
+    const { documentation, mixin, render, style } = componentFiles();
+    expect(documentation).toBe('## Component\n');
+    expect(mixin).toBe('mixin prefix-component(options)\n' +
+    '\t-const opt = options || {};\n' +
+    '\t-const classList = [];\n' +
+    '\t-const classes = classList.length > 0 ? classList.join(\' \') : null;\n' +
+    '\t.prefix-component(class=classes) component\n');
+    expect(render).toBe('extends /layout\n\nblock body\n  include component.code.pug\n');
+    expect(style).toBe('.prefix-component {\n  // component code\n}\n');
+  });
 });
