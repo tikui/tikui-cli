@@ -20,8 +20,15 @@ const createDocumentationTitle = (component: string): string => {
 
 const capitalize = (sentence: string): string => sentence.length > 1 ? sentence.charAt(0).toUpperCase() + sentence.slice(1) : sentence.toUpperCase();
 
-const createMixin = (componentDirectory: string, component: string, prefix?: string): void => {
-  const content = `mixin ${dashPrefix(prefix)}${component}\n  .${dashPrefix(prefix)}${component} ${component}\n`;
+const createMixin = (componentDirectory: string, component: string, prefix?: string, mixinOptions?: boolean): void => {
+  let content = `mixin ${dashPrefix(prefix)}${component}\n  .${dashPrefix(prefix)}${component} ${component}\n`;
+  if(mixinOptions) {
+    content = `mixin ${dashPrefix(prefix)}${component}(options)\n` +
+    '\t-const opt = options || {};\n' +
+    '\t-const classList = [];\n' +
+    '\t-const classes = classList.length > 0 ? classList.join(\' \') : null;\n' +
+    `\t.${dashPrefix(prefix)}${component}(class=classes) ${component}\n`;
+  }
   const file = `${component}.mixin.pug`;
   createFile(componentDirectory, file);
   fs.writeFileSync(path.resolve(componentDirectory, file), content);
@@ -92,13 +99,13 @@ const assertForComponentName = (componentName: string) => {
   }
 };
 
-export const createComponent = (basePath: string, component: string, prefix?: string): void => {
+export const createComponent = (basePath: string, component: string, prefix?: string, mixinOptions?: boolean): void => {
   assertForComponentName(component);
   assertForPrefix(prefix);
 
   const componentDirectory = path.resolve(basePath, component);
   createDocumentation(componentDirectory, component);
-  createMixin(componentDirectory, component, prefix);
+  createMixin(componentDirectory, component, prefix, mixinOptions);
   createCode(componentDirectory, component, prefix);
   createRender(componentDirectory, component);
   createStyle(componentDirectory, component, prefix);
