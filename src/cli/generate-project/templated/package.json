@@ -28,7 +28,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@tikui/core": "^3.0.1",
+    "@tikui/core": "^4.0.0",
     "@types/concurrently": "^7.0.0",
     "tikuidoc-tikui": "^5.0.1"
   },
@@ -43,7 +43,7 @@
     "stylelint-config-standard-scss": "^5.0.0"
   },
   "engines": {
-    "node": ">=16.15.1",
-    "npm": ">=8.11.0"
+    "node": ">=18.12.0",
+    "npm": ">=8.19.2"
   }
 }
