@@ -33,7 +33,7 @@
     "tikuidoc-tikui": "^5.0.1"
   },
   "devDependencies": {
-    "concurrently": "^7.2.2",
+    "concurrently": "^8.0.0",
     "husky": "^8.0.1",
     "postcss-scss": "^4.0.5",
     "pug-lint": "^2.6.0",
