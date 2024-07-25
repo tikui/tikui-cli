@@ -39,7 +39,7 @@
     "pug-lint": "^2.6.0",
     "stylelint": "^14.12.1",
     "stylelint-config-concentric-order": "^5.1.0",
-    "stylelint-config-standard": "^28.0.0",
+    "stylelint-config-standard": "^36.0.0",
     "stylelint-config-standard-scss": "^5.0.0"
   },
   "engines": {
