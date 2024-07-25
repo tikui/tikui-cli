@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.0.0",
-    "husky": "^8.0.1",
+    "husky": "^9.0.0",
     "postcss-scss": "^4.0.5",
     "pug-lint": "^2.6.0",
     "stylelint": "^14.12.1",
