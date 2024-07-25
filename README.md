@@ -4,7 +4,7 @@ This command line interface will allow you to generate new Tikui components.
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org)
+- [Node.js](https://nodejs.org)
 
 ## Install as developer
 

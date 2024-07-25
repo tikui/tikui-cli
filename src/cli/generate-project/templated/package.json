@@ -22,25 +22,27 @@
     "serve": "tikui-core serve",
     "build": "tikui-core build",
     "lint": "concurrently npm:sass:lint npm:pug:lint",
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write",
     "pug:lint": "pug-lint src",
     "sass:lint": "stylelint \"src/**/*.scss\"",
-    "sass:lint:fix": "stylelint \"src/**/*.scss\" --fix",
-    "prepare": "husky install"
+    "sass:lint:fix": "stylelint \"src/**/*.scss\" --fix"
   },
   "dependencies": {
-    "@tikui/core": "^4.0.0",
+    "@tikui/core": "^5.0.0",
     "@types/concurrently": "^7.0.0",
-    "tikuidoc-tikui": "^5.0.1"
+    "sass": "^1.77.8",
+    "tikuidoc-tikui": "^6.0.0"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0",
-    "husky": "^8.0.1",
+    "concurrently": "^8.2.2",
     "postcss-scss": "^4.0.5",
+    "prettier": "3.3.3",
     "pug-lint": "^2.6.0",
-    "stylelint": "^14.12.1",
-    "stylelint-config-concentric-order": "^5.1.0",
-    "stylelint-config-standard": "^28.0.0",
-    "stylelint-config-standard-scss": "^5.0.0"
+    "stylelint": "^16.7.0",
+    "stylelint-config-concentric-order": "^5.2.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^6.0.4"
   },
   "engines": {
     "node": ">=18.12.0",

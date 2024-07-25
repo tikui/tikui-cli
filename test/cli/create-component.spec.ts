@@ -8,7 +8,10 @@ const FEATURE = 'create-component';
 const FAKE_DIR = fakeDir(FEATURE);
 const FAKE_SRC_DIR = fakeSrcDir(FEATURE);
 
-const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
+const pathTo =
+  (folderPath: string) =>
+  (...segments: string[]): string =>
+    path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
 const expectAssetCreatedFor = (folderPath: string, componentName: string) => {
   const pathFolderTo = pathTo(folderPath);
@@ -24,17 +27,52 @@ const expectAssetCreatedFor = (folderPath: string, componentName: string) => {
 };
 
 const componentFiles = (name = 'component') => ({
-  documentation: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.md`), 'utf8').toString(),
-  mixin: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.mixin.pug`), 'utf8').toString(),
-  render: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.render.pug`), 'utf8').toString(),
+  documentation: fs
+    .readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.md`), 'utf8')
+    .toString(),
+  mixin: fs
+    .readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.mixin.pug`), 'utf8')
+    .toString(),
+  render: fs
+    .readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/${name}.render.pug`), 'utf8')
+    .toString(),
   style: fs.readFileSync(path.resolve(FAKE_SRC_DIR, `${name}/_${name}.scss`), 'utf8').toString(),
 });
 
 const componentWithSeparatedNameFiles = () => ({
-  documentation: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component-with-separated-name/component-with-separated-name.md'), 'utf8').toString(),
-  mixin: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component-with-separated-name/component-with-separated-name.mixin.pug'), 'utf8').toString(),
-  render: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component-with-separated-name/component-with-separated-name.render.pug'), 'utf8').toString(),
-  style: fs.readFileSync(path.resolve(FAKE_SRC_DIR, 'component-with-separated-name/_component-with-separated-name.scss'), 'utf8').toString(),
+  documentation: fs
+    .readFileSync(
+      path.resolve(FAKE_SRC_DIR, 'component-with-separated-name/component-with-separated-name.md'),
+      'utf8',
+    )
+    .toString(),
+  mixin: fs
+    .readFileSync(
+      path.resolve(
+        FAKE_SRC_DIR,
+        'component-with-separated-name/component-with-separated-name.mixin.pug',
+      ),
+      'utf8',
+    )
+    .toString(),
+  render: fs
+    .readFileSync(
+      path.resolve(
+        FAKE_SRC_DIR,
+        'component-with-separated-name/component-with-separated-name.render.pug',
+      ),
+      'utf8',
+    )
+    .toString(),
+  style: fs
+    .readFileSync(
+      path.resolve(
+        FAKE_SRC_DIR,
+        'component-with-separated-name/_component-with-separated-name.scss',
+      ),
+      'utf8',
+    )
+    .toString(),
 });
 
 describe('CLI tests', () => {
@@ -89,9 +127,15 @@ describe('CLI tests', () => {
     // Then
     const { documentation, mixin, render, style } = componentWithSeparatedNameFiles();
     expect(documentation).toBe('## Component with separated name\n');
-    expect(mixin).toBe('mixin component-with-separated-name\n  .component-with-separated-name component-with-separated-name\n');
-    expect(render).toBe('extends /layout\n\nblock body\n  include component-with-separated-name.code.pug\n');
-    expect(style).toBe('.component-with-separated-name {\n  // component-with-separated-name code\n}\n');
+    expect(mixin).toBe(
+      'mixin component-with-separated-name\n  .component-with-separated-name component-with-separated-name\n',
+    );
+    expect(render).toBe(
+      'extends /layout\n\nblock body\n  include component-with-separated-name.code.pug\n',
+    );
+    expect(style).toBe(
+      '.component-with-separated-name {\n  // component-with-separated-name code\n}\n',
+    );
   });
 
   it('Should style manage prefix component class', () => {
@@ -107,21 +151,29 @@ describe('CLI tests', () => {
   });
 
   it('Should create when component name has lower alphabetic separated by optional dash characters', () => {
-    expect(() => createComponent(FAKE_SRC_DIR, 'UPPERCASE'))
-      .toThrow('The component should have alphabetic characters separated by dashes: "U" at position 1 is not allowed');
-    expect(() => createComponent(FAKE_SRC_DIR, '-begin')).toThrow('The component should have alphabetic characters separated by dashes: "-" at position 1 is not allowed');
-    expect(() => createComponent(FAKE_SRC_DIR, 'end-')).toThrow('The component should have alphabetic characters separated by dashes: "-" at position 4 is not allowed');
+    expect(() => createComponent(FAKE_SRC_DIR, 'UPPERCASE')).toThrow(
+      'The component should have alphabetic characters separated by dashes: "U" at position 1 is not allowed',
+    );
+    expect(() => createComponent(FAKE_SRC_DIR, '-begin')).toThrow(
+      'The component should have alphabetic characters separated by dashes: "-" at position 1 is not allowed',
+    );
+    expect(() => createComponent(FAKE_SRC_DIR, 'end-')).toThrow(
+      'The component should have alphabetic characters separated by dashes: "-" at position 4 is not allowed',
+    );
     expect(() => createComponent(FAKE_SRC_DIR, '')).toThrow('Component name should not be empty');
     expect(() => createComponent(FAKE_SRC_DIR, 'a-long-component')).not.toThrow();
   });
 
   it('Should create when prefix has lower alphabetic separated by optional dash characters', () => {
-    expect(() => createComponent(FAKE_SRC_DIR, 'component', 'UPPERCASE'))
-      .toThrow('The prefix should have alphabetic characters separated by dashes: "U" at position 1 is not allowed');
-    expect(() => createComponent(FAKE_SRC_DIR, 'component', '-begin'))
-      .toThrow('The prefix should have alphabetic characters separated by dashes: "-" at position 1 is not allowed');
-    expect(() => createComponent(FAKE_SRC_DIR, 'component', 'end-'))
-      .toThrow('The prefix should have alphabetic characters separated by dashes: "-" at position 4 is not allowed');
+    expect(() => createComponent(FAKE_SRC_DIR, 'component', 'UPPERCASE')).toThrow(
+      'The prefix should have alphabetic characters separated by dashes: "U" at position 1 is not allowed',
+    );
+    expect(() => createComponent(FAKE_SRC_DIR, 'component', '-begin')).toThrow(
+      'The prefix should have alphabetic characters separated by dashes: "-" at position 1 is not allowed',
+    );
+    expect(() => createComponent(FAKE_SRC_DIR, 'component', 'end-')).toThrow(
+      'The prefix should have alphabetic characters separated by dashes: "-" at position 4 is not allowed',
+    );
     expect(() => createComponent(FAKE_SRC_DIR, 'a-long-component')).not.toThrow();
   });
 });

@@ -8,19 +8,13 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
     "target": "esnext"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

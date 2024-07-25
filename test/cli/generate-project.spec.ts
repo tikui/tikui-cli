@@ -8,19 +8,26 @@ const FEATURE = 'generate-project';
 
 const FAKE_DIR = fakeDir(FEATURE);
 
-const pathTo = (folderPath: string) => (...segments: string[]): string => path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
+const pathTo =
+  (folderPath: string) =>
+  (...segments: string[]): string =>
+    path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
 const GENERATE_PROJECT_PATH = path.resolve(__dirname, '../../src/cli/generate-project');
 
-const pathFromCategory = (category: string) => (filename: string): string => path.resolve(GENERATE_PROJECT_PATH, category, filename);
+const pathFromCategory =
+  (category: string) =>
+  (filename: string): string =>
+    path.resolve(GENERATE_PROJECT_PATH, category, filename);
 
 const pathFromTemplated = pathFromCategory('templated');
 
 const expectAssetCreatedFor = (name: string) => {
   const pathFolderTo = pathTo(name);
 
-  const expectFileForCategory = (expectSame: ExpectSame) => (category: string) => (filePath: string) =>
-    expectSame(pathFolderTo(filePath), pathFromCategory(category)(filePath));
+  const expectFileForCategory =
+    (expectSame: ExpectSame) => (category: string) => (filePath: string) =>
+      expectSame(pathFolderTo(filePath), pathFromCategory(category)(filePath));
 
   const expectSameTextFileForCategory = expectFileForCategory(expectSameTextFile);
   const expectSameBinaryFileForCategory = expectFileForCategory(expectSameBinaryFile);
@@ -58,7 +65,7 @@ const expectAssetCreatedFor = (name: string) => {
   ].forEach(expectSameTextFileForCategory('atomic'));
 
   expectPackageJson();
-  expectSameTextFile( pathFolderTo('.gitignore'), pathFromTemplated('gitignore'));
+  expectSameTextFile(pathFolderTo('.gitignore'), pathFromTemplated('gitignore'));
 };
 
 describe('CLI tests', () => {
@@ -66,11 +73,14 @@ describe('CLI tests', () => {
 
   afterAll(() => removeFakeDir(FEATURE));
 
-  it.each(['project', 'my-awesome_project2'])('Should create project under project name directory and its files for %s', (name) => {
-    generateProject(FAKE_DIR, name);
+  it.each(['project', 'my-awesome_project2'])(
+    'Should create project under project name directory and its files for %s',
+    (name) => {
+      generateProject(FAKE_DIR, name);
 
-    expectAssetCreatedFor(name);
-  });
+      expectAssetCreatedFor(name);
+    },
+  );
 
   it.each([
     { name: ' project  ', normalized: 'project' },
@@ -86,8 +96,8 @@ describe('CLI tests', () => {
   });
 
   it.each(['bad name', 'é', 'BadName'])('Should not generate for bad name %s', (name) =>
-    expect(() =>
-      generateProject(FAKE_DIR, name)
-    ).toThrow(`The project name "${name}" is not valid, it should be composed by lowercase alphanumeric, dash or underscore characters`)
+    expect(() => generateProject(FAKE_DIR, name)).toThrow(
+      `The project name "${name}" is not valid, it should be composed by lowercase alphanumeric, dash or underscore characters`,
+    ),
   );
 });
