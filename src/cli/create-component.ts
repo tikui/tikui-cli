@@ -2,9 +2,10 @@ import * as path from 'path';
 import * as fse from 'fs-extra';
 import * as fs from 'fs';
 
-const createFile = (folderPath: string, filename: string): void => fse.ensureFileSync(path.resolve(folderPath, filename));
+const createFile = (folderPath: string, filename: string): void =>
+  fse.ensureFileSync(path.resolve(folderPath, filename));
 
-const dashPrefix = (prefix?: string) => prefix === undefined ? '' : `${prefix}-`;
+const dashPrefix = (prefix?: string) => (prefix === undefined ? '' : `${prefix}-`);
 
 const createDocumentation = (componentDirectory: string, component: string): void => {
   const content = `## ${createDocumentationTitle(component)}\n`;
@@ -18,7 +19,10 @@ const createDocumentationTitle = (component: string): string => {
   return capitalize(componentNameWithoutDash);
 };
 
-const capitalize = (sentence: string): string => sentence.length > 1 ? sentence.charAt(0).toUpperCase() + sentence.slice(1) : sentence.toUpperCase();
+const capitalize = (sentence: string): string =>
+  sentence.length > 1
+    ? sentence.charAt(0).toUpperCase() + sentence.slice(1)
+    : sentence.toUpperCase();
 
 const createMixin = (componentDirectory: string, component: string, prefix?: string): void => {
   const content = `mixin ${dashPrefix(prefix)}${component}\n  .${dashPrefix(prefix)}${component} ${component}\n`;
@@ -48,12 +52,16 @@ const createStyle = (componentDirectory: string, component: string, prefix?: str
   fs.writeFileSync(path.resolve(componentDirectory, file), content);
 };
 
-const throwNameError = (type: string) => (character: string, position: number): void => {
-  throw new Error(`The ${type} should have alphabetic characters separated by dashes: "${character}" at position ${position} is not allowed`);
-};
+const throwNameError =
+  (type: string) =>
+  (character: string, position: number): void => {
+    throw new Error(
+      `The ${type} should have alphabetic characters separated by dashes: "${character}" at position ${position} is not allowed`,
+    );
+  };
 
 const assertForNameCharacter = (type: string) => (character: string, position: number) => {
-  if(character.match(/[a-z-]/) === null) {
+  if (character.match(/[a-z-]/) === null) {
     throwNameError(type)(character, position);
   }
 };
@@ -68,11 +76,11 @@ const assertForName = (type: string) => (name: string) => {
     assertForNamedCharacter(character, position);
   });
 
-  if(name.charAt(0) === '-') {
+  if (name.charAt(0) === '-') {
     throwNamedError(name.charAt(0), 1);
   }
 
-  if(name.charAt(lastPosition - 1) === '-') {
+  if (name.charAt(lastPosition - 1) === '-') {
     throwNamedError(name.charAt(lastPosition - 1), lastPosition);
   }
 };
@@ -87,7 +95,7 @@ const assertForPrefix = (prefix: string) => {
 const assertForComponentName = (componentName: string) => {
   assertForName('component')(componentName);
 
-  if(componentName === '') {
+  if (componentName === '') {
     throw new Error('Component name should not be empty');
   }
 };

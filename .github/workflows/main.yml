@@ -30,6 +30,7 @@ jobs:
         run: |
           npm ci
           npm run lint
+          npm run format
           npm test
           npm run build
         env:
@@ -55,7 +56,7 @@ jobs:
   # This job is used as required status check to pass before merging to the main branch
   status-checks:
     name: status-checks
-    needs: [ build-windows, build-linux ]
+    needs: [build-windows, build-linux]
     permissions:
       contents: none
     if: always()
@@ -72,7 +73,7 @@ jobs:
           exit 1
   deploy:
     if: startsWith(github.event.ref, 'refs/tags/')
-    needs: ["status-checks"]
+    needs: ['status-checks']
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:

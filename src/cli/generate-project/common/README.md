@@ -6,7 +6,7 @@ Tikui is a MIT-licensed free software project allowing you to create a web patte
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org) LTS version
+- [Node.js](https://nodejs.org) LTS version
 
 ## Development
 
@@ -36,8 +36,8 @@ tikui create -p tikui button src/atom
 
 > You can read the help from `tikui` and each commands using:
 >
-> * `tikui help` to see the global help
-> * `tikui help create` to see a command help, here `create`
+> - `tikui help` to see the global help
+> - `tikui help create` to see a command help, here `create`
 
 #### Create a component
 
