@@ -2,7 +2,6 @@
 /.tikui-cache
 /node_modules
 /dist
-/build
 
 ######################
 # Visual Studio Code
