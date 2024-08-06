@@ -28,21 +28,19 @@
     "sass:lint": "stylelint \"src/**/*.scss\"",
     "sass:lint:fix": "stylelint \"src/**/*.scss\" --fix"
   },
-  "dependencies": {
+  "devDependencies": {
     "@tikui/core": "^6.0.0",
     "@types/concurrently": "^7.0.0",
-    "sass": "^1.77.8",
-    "tikuidoc-tikui": "^6.0.0"
-  },
-  "devDependencies": {
     "concurrently": "^8.2.2",
     "postcss-scss": "^4.0.5",
     "prettier": "3.3.3",
     "pug-lint": "^2.6.0",
+    "sass": "^1.77.8",
     "stylelint": "^16.7.0",
     "stylelint-config-concentric-order": "^5.2.0",
     "stylelint-config-standard-scss": "^13.1.0",
-    "stylelint-order": "^6.0.4"
+    "stylelint-order": "^6.0.4",
+    "tikuidoc-tikui": "^7.0.0"
   },
   "engines": {
     "node": ">=18.12.0",
