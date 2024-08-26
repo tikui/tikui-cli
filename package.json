@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "files": [
