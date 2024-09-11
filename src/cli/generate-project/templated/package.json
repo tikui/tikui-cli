@@ -31,7 +31,7 @@
   "devDependencies": {
     "@tikui/core": "^6.0.0",
     "@types/concurrently": "^7.0.0",
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.0.0",
     "postcss-scss": "^4.0.5",
     "prettier": "3.3.3",
     "pug-lint": "^2.6.0",
