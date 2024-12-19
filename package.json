@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "files": [
@@ -14,7 +14,7 @@
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc && cp -r src/cli/generate-project dist/cli/generate-project",
+    "build": "npm run clean && cp ./package.json src/bin/package.json && tsc && cp -r src/cli/generate-project dist/cli/generate-project",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll",

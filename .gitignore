@@ -4,3 +4,4 @@
 /dist
 /node_modules
 /test/cli/tmp
+/src/bin/package.json

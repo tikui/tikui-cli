@@ -5,6 +5,8 @@ import { program } from 'commander';
 import { createComponent } from '@/cli/create-component';
 import * as path from 'path';
 import { generateProject } from '@/cli/generate-project';
+import * as process from 'node:process';
+import { version } from './package.json';
 
 try {
   program
@@ -25,6 +27,8 @@ try {
       generateProject(destination, project);
       console.log(`Generating project ${project} to ${path.resolve(destination)}`); // eslint-disable-line no-console
     });
+
+  program.version(version, '-v, --version', 'current version');
 
   program.parse(process.argv);
 } catch (e) {
