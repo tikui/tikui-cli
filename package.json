@@ -46,7 +46,7 @@
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.0.0",
-    "commander": "^12.1.0",
+    "commander": "^13.0.0",
     "fs-extra": "^11.2.0",
     "module-alias": "^2.2.2",
     "rimraf": "^6.0.1"
