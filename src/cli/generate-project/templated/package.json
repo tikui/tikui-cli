@@ -29,7 +29,7 @@
     "sass:lint:fix": "stylelint \"src/**/*.scss\" --fix"
   },
   "devDependencies": {
-    "@tikui/core": "^6.0.0",
+    "@tikui/core": "^7.0.0",
     "@types/concurrently": "^7.0.0",
     "concurrently": "^9.0.0",
     "postcss-scss": "^4.0.5",
@@ -40,10 +40,10 @@
     "stylelint-config-concentric-order": "^5.2.0",
     "stylelint-config-standard-scss": "^15.0.0",
     "stylelint-order": "^7.0.0",
-    "tikuidoc-tikui": "^8.0.0"
+    "tikuidoc-tikui": "^9.0.0"
   },
   "engines": {
-    "node": ">=18.12.0",
-    "npm": ">=8.19.2"
+    "node": ">=20.0.0",
+    "npm": ">=9.6.4"
   }
 }
