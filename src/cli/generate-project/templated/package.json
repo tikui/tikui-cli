@@ -21,6 +21,7 @@
   "scripts": {
     "serve": "tikui-core serve",
     "build": "tikui-core build",
+    "preview": "tikui-core preview",
     "lint": "concurrently npm:sass:lint npm:pug:lint",
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
