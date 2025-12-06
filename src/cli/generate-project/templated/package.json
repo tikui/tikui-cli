@@ -34,7 +34,7 @@
     "@types/concurrently": "^7.0.0",
     "concurrently": "^9.0.0",
     "postcss-scss": "^4.0.5",
-    "prettier": "3.7.3",
+    "prettier": "3.7.4",
     "pug-lint": "^2.6.0",
     "sass": "^1.77.8",
     "stylelint": "^16.7.0",
