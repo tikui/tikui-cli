@@ -4,8 +4,8 @@ include /documentation/mixin
 
 block header
   block vars
-    -let active='';
-    -const isActive = current => current === active;
+    - let active = '';
+    - const isActive = (current) => current === active;
   +tikui-navbar('[[TIKUI_BASEPATH]]index.html', 'Tikui')
     +tikui-navbar-item('[[TIKUI_BASEPATH]]atom/atom.html', 'Atoms', isActive('atom'))
     +tikui-navbar-item('[[TIKUI_BASEPATH]]molecule/molecule.html', 'Molecules', isActive('molecule'))

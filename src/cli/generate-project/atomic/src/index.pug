@@ -18,10 +18,10 @@ block content
             em HTML
         .tikui-vertical-spacing--line
           pre
-            code.language-html.
-              #{'<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />'}
-              #{''}
-              #{'<link rel="stylesheet" href="{DOMAIN}/tikui.css" />'}
+            code.language-html
+              | #{ '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />' }
+              |
+              | #{ '<link rel="stylesheet" href="{DOMAIN}/tikui.css" />' }
         .tikui-vertical-spacing--line
           p.tikui-paragraph
             em Pug
@@ -34,7 +34,7 @@ block content
         .tikui-vertical-spacing--line
           h2.tikui-title-section Documentation
         .tikui-vertical-spacing--line
-          p.tikui-paragraph The Style have an #[a.tikui-link(href='http://atomicdesign.bradfrost.com' target='_blank') Atomic Design] structure.
+          p.tikui-paragraph The Style have an #[a.tikui-link(href='http://atomicdesign.bradfrost.com', target='_blank') Atomic Design] structure.
         .tikui-vertical-spacing--line
           ul.tikui-list
             li
