@@ -48,7 +48,6 @@ const expectAssetCreatedFor = (name: string) => {
   ['src/favicon.ico'].forEach(expectSameBinaryFileForCategory('common'));
   [
     '.editorconfig',
-    '.pug-lintrc.json',
     '.stylelintrc.json',
     'logo.svg',
     'README.md',

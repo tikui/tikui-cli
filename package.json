@@ -1,6 +1,6 @@
 {
   "name": "@tikui/cli",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "Command lines tool for Tikui",
   "main": "index.js",
   "files": [
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@prettier/plugin-pug": "^3.4.2",
     "@types/jest": "^30.0.0",
     "eslint": "^9.9.0",
     "eslint-plugin-jest": "^29.0.0",
