@@ -1,19 +1,19 @@
-import * as fse from 'fs-extra';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+import { copySync } from 'fs-extra/esm';
 
 const copyFromCategory =
   (...categories: string[]) =>
   (basePath: string, name: string): void =>
     categories.forEach((category) =>
-      fse.copySync(
-        path.resolve(__dirname, `generate-project/${category}`),
+      copySync(
+        path.resolve(import.meta.dirname, `generate-project/${category}`),
         path.resolve(basePath, name),
       ),
     );
 
 const templateSourcePath = (filePath: string): string =>
-  path.resolve(__dirname, 'generate-project/templated', filePath);
+  path.resolve(import.meta.dirname, 'generate-project/templated', filePath);
 
 const copyPackageJson = (name: string, basePath: string) => {
   const packageJson = JSON.parse(fs.readFileSync(templateSourcePath('package.json')).toString());

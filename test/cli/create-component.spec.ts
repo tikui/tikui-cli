@@ -1,7 +1,8 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { createComponent } from '@/cli/create-component';
-import { fakeDir, fakeSrcDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { createComponent } from '../../src/cli/create-component.js';
+import { fakeDir, fakeSrcDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture.js';
 
 const FEATURE = 'create-component';
 

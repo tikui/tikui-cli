@@ -1,17 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "dist",
+    "rootDir": "src",
     "resolveJsonModule": true,
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
     "target": "esnext"

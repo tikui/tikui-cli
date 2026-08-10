@@ -1,4 +1,5 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
+import { expect } from 'vitest';
 
 export type ExpectSame = (actualPath: string, expectedPath: string) => void;
 

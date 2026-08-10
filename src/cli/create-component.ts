@@ -1,9 +1,9 @@
-import * as path from 'path';
-import * as fse from 'fs-extra';
-import * as fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+import { ensureFileSync } from 'fs-extra/esm';
 
 const createFile = (folderPath: string, filename: string): void =>
-  fse.ensureFileSync(path.resolve(folderPath, filename));
+  ensureFileSync(path.resolve(folderPath, filename));
 
 const dashPrefix = (prefix?: string) => (prefix === undefined ? '' : `${prefix}-`);
 
@@ -85,7 +85,7 @@ const assertForName = (type: string) => (name: string) => {
   }
 };
 
-const assertForPrefix = (prefix: string) => {
+const assertForPrefix = (prefix?: string) => {
   if (prefix === undefined) {
     return;
   }

@@ -1,8 +1,9 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { fakeDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture';
-import { generateProject } from '@/cli/generate-project';
-import { ExpectSame, expectSameBinaryFile, expectSameTextFile } from './file.fixture';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { fakeDir, removeFakeDir, resetFakeDir } from './fake-dir.fixture.js';
+import { generateProject } from '../../src/cli/generate-project.js';
+import { ExpectSame, expectSameBinaryFile, expectSameTextFile } from './file.fixture.js';
 
 const FEATURE = 'generate-project';
 
@@ -13,7 +14,7 @@ const pathTo =
   (...segments: string[]): string =>
     path.resolve(FAKE_DIR, `${folderPath}`, ...segments);
 
-const GENERATE_PROJECT_PATH = path.resolve(__dirname, '../../src/cli/generate-project');
+const GENERATE_PROJECT_PATH = path.resolve(import.meta.dirname, '../../src/cli/generate-project');
 
 const pathFromCategory =
   (category: string) =>
