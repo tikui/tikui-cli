@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-import 'module-alias/register';
 import { program } from 'commander';
-import { createComponent } from '@/cli/create-component';
-import * as path from 'path';
-import { generateProject } from '@/cli/generate-project';
+import * as path from 'node:path';
 import * as process from 'node:process';
-import { version } from './package.json';
+import { createComponent } from '../cli/create-component.js';
+import { generateProject } from '../cli/generate-project.js';
+import packageJson from './package.json' with { type: 'json' };
 
 try {
   program
@@ -28,10 +27,10 @@ try {
       console.log(`Generating project ${project} to ${path.resolve(destination)}`); // eslint-disable-line no-console
     });
 
-  program.version(version, '-v, --version', 'current version');
+  program.version(packageJson.version, '-v, --version', 'current version');
 
   program.parse(process.argv);
 } catch (e) {
-  console.error(e.message); // eslint-disable-line no-console
+  console.error(e instanceof Error ? e.message : e); // eslint-disable-line no-console
   process.exit(1);
 }

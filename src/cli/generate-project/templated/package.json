@@ -29,18 +29,18 @@
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.4.2",
-    "@tikui/core": "^7.0.0",
+    "@tikui/core": "^8.0.0",
     "postcss-scss": "^4.0.5",
     "prettier": "3.9.6",
     "sass": "^1.77.8",
-    "stylelint": "^16.7.0",
+    "stylelint": "^17.0.0",
     "stylelint-config-concentric-order": "^5.2.0",
-    "stylelint-config-standard-scss": "^15.0.0",
-    "stylelint-order": "^7.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-order": "^8.0.0",
     "tikuidoc-tikui": "^9.0.0"
   },
   "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=9.6.4"
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
   }
 }
