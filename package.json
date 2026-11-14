@@ -51,7 +51,7 @@
     "@prettier/plugin-pug": "^3.4.2",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.0.0",
-    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/coverage-v8": "^5.0.0",
     "@vitest/eslint-plugin": "^1.6.27",
     "eslint": "^10.0.0",
     "globals": "^17.0.0",
@@ -60,7 +60,7 @@
     "rimraf": "^6.0.1",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.1.0",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.0"
   },
   "bin": {
     "tikuicli": "./dist/bin/tikuicli.js",
