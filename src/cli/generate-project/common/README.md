@@ -26,6 +26,14 @@ In development, you can run the application locally on [localhost:3000](http://l
 npm run serve
 ```
 
+### Clear the cache
+
+`npm run serve` keeps the compiled styles in the `.tikui-cache` directory. If a removed or renamed Sass file is still served, clear the cache:
+
+```bash
+npm run clear
+```
+
 ### Create a component
 
 First of all, the source folder `src` follows the [Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/) methodology.
